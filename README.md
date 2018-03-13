@@ -1,2 +1,2 @@
 # GK
-Gry Komputerowe
+Gry Komputerowe - programowanie w OpenGL
