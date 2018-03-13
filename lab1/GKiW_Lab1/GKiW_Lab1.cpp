@@ -37,6 +37,9 @@ int main(int argc, char * argv[])
 
 // Licznik klatek - uzyteczny przy prostym ruchu kamery.
 int frame = 0;
+float angle = 0;
+float maxAngle = 65.0f;
+bool up = true;
 
 // Callback przerysowujacy klatke.
 void OnRender() {
@@ -86,47 +89,92 @@ void OnRender() {
 		glutSolidSphere(.5f, 24, 24);
 	glPopMatrix();
 
-	//reka 1
-	glColor3f(1.0f, 1.0f, 1.0f);
+
 	glPushMatrix();
-		glTranslatef(1.6f, 1.0f, 0.0f);
-		glScalef(1.8f, 0.2f, 0.2f);
-		glutSolidCube(1.0f);
+
+		//obroc cala reke
+		glTranslatef(0.8f, 1.0f, 0.0f);
+		glRotatef(-angle, 0.0f, 0.0f, 1.0f);
+		glTranslatef(-0.8f, -1.0f, 0.0f);
+
+		//reka 1
+		glColor3f(1.0f, 1.0f, 1.0f);
+		glPushMatrix();
+			glTranslatef(1.6f, 1.0f, 0.0f);
+			glScalef(1.8f, 0.15f, 0.15f);
+			glutSolidCube(1.0f);
+		glPopMatrix();
+
+		//dlon 1
+		glColor3f(1.0f, 0.0f, 0.0f);
+		glPushMatrix();
+			glTranslatef(2.8f, 1.0f, 0.0f);
+			glScalef(1.0f, 1.0f, 1.0f);
+			glutSolidSphere(.3f, 24, 24);
+		glPopMatrix();
+
 	glPopMatrix();
 
-	//dlon 1
-	glColor3f(1.0f, 0.0f, 0.0f);
+
+
+
 	glPushMatrix();
-		glTranslatef(2.8f, 1.0f, 0.0f);
-		glScalef(1.0f, 1.0f, 1.0f);
-		glutSolidSphere(.3f, 24, 24);
-	glPopMatrix();
 
+		//obroc cala reke
+		glTranslatef(-0.8f, 1.0f, 0.0f);
+		glRotatef( angle, 0.0f, 0.0f, 1.0f);
+		glTranslatef(0.8f, -1.0f, 0.0f);
 
+		//reka 2
+		glColor3f(1.0f, 1.0f, 1.0f);
+		glPushMatrix();
+			glTranslatef(-1.6f, 1.0f, 0.0f);
+			glScalef(1.8f, 0.15f, 0.15f);
+			glutSolidCube(1.0f);
+		glPopMatrix();
 
+		//dlon 2
+		glColor3f(1.0f, 0.0f, 0.0f);
+		glPushMatrix();
+			glTranslatef(-2.8f, 1.0f, 0.0f);
+			glScalef(1.0f, 1.0f, 1.0f);
+			glutSolidSphere(.3f, 24, 24);
+		glPopMatrix();
 
-	//reka 2
-	glColor3f(1.0f, 1.0f, 1.0f);
-	glPushMatrix();
-		glTranslatef(-1.6f, 1.0f, 0.0f);
-		glScalef(1.8f, 0.2f, 0.2f);
-		glutSolidCube(1.0f);
-	glPopMatrix();
-
-	//dlon 2
-	glColor3f(1.0f, 0.0f, 0.0f);
-	glPushMatrix();
-		glTranslatef(-2.8f, 1.0f, 0.0f);
-		glScalef(1.0f, 1.0f, 1.0f);
-		glutSolidSphere(.3f, 24, 24);
 	glPopMatrix();
 
 	//noga 1
 	glColor3f(1.0f, 0.0f, 1.0f);
 	glPushMatrix();
-		glTranslatef(0.0f, -2.2f, 0.0f);
-		glScalef(0.2f, 1.8f, 0.2f);
+		glTranslatef(0.6f, -2.0f, 0.0f);
+		glRotatef(15.0f, 0.0f, 0.0f, 1.0f);
+		glScalef(0.15f, 2.0f, 0.15f);
 		glutSolidCube(1.0f);
+	glPopMatrix();
+
+	//stopa 1
+	glColor3f(1.0f, 0.0f, 0.0f);
+	glPushMatrix();
+		glTranslatef(0.95f, -3.4f, 0.0f);
+		glScalef(1.0f, 1.0f, 1.0f);
+		glutSolidSphere(.3f, 24, 24);
+	glPopMatrix();
+
+	//noga 2
+	glColor3f(1.0f, 0.0f, 1.0f);
+	glPushMatrix();
+		glTranslatef(-0.6f, -2.0f, 0.0f);
+		glRotatef(-15.0f, 0.0f, 0.0f, 1.0f);
+		glScalef(0.15f, 2.0f, 0.15f);
+		glutSolidCube(1.0f);
+	glPopMatrix();
+
+	//stopa 2
+	glColor3f(1.0f, 0.0f, 0.0f);
+	glPushMatrix();
+		glTranslatef(-0.95f, -3.4f, 0.0f);
+		glScalef(1.0f, 1.0f, 1.0f);
+		glutSolidSphere(.3f, 24, 24);
 	glPopMatrix();
 
 	//// Prostopadloscian
@@ -165,6 +213,28 @@ void OnRender() {
 
 	// Inkrementacja licznika klatek.
 	frame++;
+
+	//obliczenie nowego kata
+	if(!(frame % 20))
+		if (up)
+		{
+			angle--;
+			if (angle < -maxAngle)
+			{
+				angle = -maxAngle;
+				up = false;
+			}
+		}
+		else
+		{
+			angle++;
+			if (angle > 0)
+			{
+				angle = 0;
+				up = true;
+			}
+		}
+
 
 }
 

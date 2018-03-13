@@ -1,10 +1,9 @@
-﻿  stdafx.cpp
-  GKiW_Lab1.cpp
-GKiW_Lab1.cpp(61): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+﻿  GKiW_Lab1.cpp
+GKiW_Lab1.cpp(64): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
   Generating code
-  5 of 5 functions (100.0%) were compiled, the rest were copied from previous compilation.
+  1 of 5 functions (20.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    1 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   GKiW_Lab1.vcxproj -> E:\github_macias0\GK\lab1\Release\GKiW_Lab1.exe
   GKiW_Lab1.vcxproj -> E:\github_macias0\GK\lab1\Release\GKiW_Lab1.pdb (Full PDB)
